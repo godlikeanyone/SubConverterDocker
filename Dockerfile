@@ -1,2 +1,2 @@
 FROM fireflylzh/subconverter:latest
-COPY base/ /base/
+COPY /usr/bin/ /usr/bin/
