@@ -16,7 +16,7 @@
         },
         "MANAGED_PREFIX": {
             "description": "Address prefix used for generating RULE-SET and provider URLs. On Heroku this field should be \"https://{App name}.herokuapp.com\" (Replace \"{App name}\" with the one you set above).",
-            "value": ""
+            "value": "https://firefly-sub.herokuapp.com"
         }
     }
 }
