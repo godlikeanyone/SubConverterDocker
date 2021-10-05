@@ -2,9 +2,11 @@ name: Update sub-web
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "subconverter/**"
+
+concurrency:
+  group: sub-web
+  # 自动取消其他运行中的workflow
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -41,14 +43,6 @@ jobs:
           sudo rm -rf sub-web
           mv temp sub-web
 
-      - name: Check subconverter
-        run: |
-          cp -f subconverter/pref.example.ini subconverter/pref.ini
-          sudo chmod +x subconverter/subconverter.exe
-          sed -i 's/api_mode=false/api_mode=true/g' subconverter/pref.ini
-          sed -i 's/managed_config_prefix=http:\/\/127.0.0.1:25500/managed_config_prefix=https:\/\/firefly-sub.herokuapp.com/g' subconverter/pref.ini
-          sed -i 's/async_fetch_ruleset=false/async_fetch_ruleset=true/g' subconverter/pref.ini
-          sed -i 's/max_concurrent_threads=./max_concurrent_threads=4/g' subconverter/pref.ini
       - name: Add & Commit
         uses: EndBug/add-and-commit@v7.3.0
         with:
@@ -57,4 +51,4 @@ jobs:
           message: "Update sub-web from LM-Firefly/sub-web"
           add: "-A"
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          secrets.GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
