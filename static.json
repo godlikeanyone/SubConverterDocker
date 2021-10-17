@@ -1,7 +1,14 @@
 {
-  "root": "dist",
+  "root": "/",
   "clean_urls": true,
-  "routes": {
-    "/**": "index.html"
-  }
+  "routes": [
+    {
+      "src": "/(js|css|fonts)/(.*)",
+      "dest": "sub-web/$1/$2"
+    },
+    { "handle": "filesystem" },
+    { "src": "/", "dest": "sub-web/index.html" },
+    { "src": "/favicon\\.ico", "dest": "sub-web/favicon.ico" },
+    { "src": "/(.*)", "dest": "subconverter/subconverter.exe" }
+  ]
 }
