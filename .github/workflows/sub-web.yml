@@ -21,7 +21,7 @@ jobs:
 
       - name: Update sub-web
         run: |
-          rm -rf base/sub-web
+          rm -rf base/sub-web/
           git clone https://github.com/LM-Firefly/sub-web.git
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -31,7 +31,7 @@ jobs:
 
       - name: Get dependencies and build
         run: |
-          cd base/sub-web
+          cd base/sub-web/
           yarn install
           yarn build
 
@@ -40,8 +40,8 @@ jobs:
           cd $GITHUB_WORKSPACE
           mkdir temp
           sudo cp -rf base/sub-web/dist/* temp/
-          sudo rm -rf base/sub-web
-          mv temp base/sub-web
+          sudo rm -rf base/sub-web/
+          mv temp base/sub-web/
 
       - name: Add & Commit
         uses: EndBug/add-and-commit@v7.3.0
