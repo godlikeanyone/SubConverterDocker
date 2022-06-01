@@ -1,8 +1,8 @@
-# railway-sub
+# Railway-Subconverter
 
 在 Railway.app 上搭建 subconverter
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2FLM-Firefly%2Frailway-sub)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2FLM-Firefly%2FFirefly-sub)
 
 将配置文件等放在 base/文件夹内
 
