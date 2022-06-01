@@ -1,7 +1,6 @@
 FROM alpine:3.16
 ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
 ARG THREADS="4"
-ARG SHA=""
 
 # build minimized
 WORKDIR /
