@@ -2,8 +2,6 @@
 
 在 Railway.app 上搭建 subconverter
 
-**提醒：可能会被 Railway.app 以“Xray”的不明理由封号**
-
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2FLM-Firefly%2Frailway-sub)
 
 将配置文件等放在 base/文件夹内
