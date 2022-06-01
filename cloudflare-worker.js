@@ -6,10 +6,6 @@ const blacklist = {
     /(ss|free|proxy)\./,
     /\.(ml|cf|tk|ga|gq)/,
     /(ssr?|clash|v2ray|proxy)pool/,
-    "stgod",
-    "lonxin",
-    "linbaoz",
-    "luoml",
   ],
 };
 // 设置白名单IP
