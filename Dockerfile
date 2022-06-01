@@ -35,7 +35,7 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cd .. && \
     git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
     cd subconverter && \
-    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$SHA"'/' src/version.h;\
+    git describe --exact-match HEAD || [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$SHA"'/' src/version.h ;\
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j $THREADS && \
     mv subconverter /usr/bin && \
