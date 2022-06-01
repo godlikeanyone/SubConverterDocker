@@ -1,6 +1,6 @@
 {
   "name": "SubConverter",
-  "description": "Run SubConverter on Heroku.",
+  "description": "Run SubConverter on Render.",
   "keywords": ["subconverter"],
   "website": "https://github.com/LM-Firefly/Firefly-sub",
   "repository": "https://github.com/LM-Firefly/Firefly-sub",
