@@ -2,7 +2,7 @@
 
 在 Render.com 上搭建 subconverter
 
-将配置文件等放在 base/文件夹内
+将配置文件等放在 [base/](https://github.com/LM-Firefly/Firefly-sub/tree/render/base)文件夹内
 
 Render.com 如若网络不畅，可以自行架设 cloudflare worker 作为中转代理，同时限制他人对接口的滥用：
 
