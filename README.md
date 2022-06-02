@@ -6,7 +6,7 @@
 
 将配置文件等放在 [base/](https://github.com/LM-Firefly/Firefly-sub/tree/railway/base)文件夹内
 
-Railway.app 如若网络不畅，可以自行架设 cloudflare worker 作为中转代理，同时限制他人对接口的滥用：
+Railway.app 如若网络不畅，可以自行架设 [cloudflare worker](https://workers.cloudflare.com) 作为中转代理，同时限制他人对接口的滥用：
 
 1. 复制 [cloudflare-worker.js ](https://github.com/LM-Firefly/Firefly-sub/blob/railway/cloudflare-worker.js)中的内容到 cloudflare worker 编辑页面中，并且修改 1-27 行（有注释）
 2. 修改第 2 行的网址为你的 Railway 后端地址（不带末尾的/斜杠）
