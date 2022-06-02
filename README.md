@@ -4,7 +4,7 @@
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2FLM-Firefly%2FFirefly-sub)
 
-将配置文件等放在 base/文件夹内
+将配置文件等放在 [base/](https://github.com/LM-Firefly/Firefly-sub/tree/railway/base)文件夹内
 
 Railway.app 如若网络不畅，可以自行架设 cloudflare worker 作为中转代理，同时限制他人对接口的滥用：
 
