@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:latest
 ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
 
 # build minimized
