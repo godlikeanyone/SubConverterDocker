@@ -1,5 +1,6 @@
 FROM alpine:latest
 ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
+ARG THREADS="4"
 
 # build minimized
 WORKDIR /
@@ -9,7 +10,7 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cd quickjspp && \
     git submodule update --init && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
-    make quickjs -j4 && \
+    make quickjs -j $THREADS && \
     install -m644 quickjs/libquickjs.a /usr/lib && \
     install -d /usr/include/quickjs/ && \
     install -m644 quickjs/quickjs.h quickjs/quickjs-libc.h /usr/include/quickjs/ && \
@@ -19,7 +20,7 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cd libcron && \
     git submodule update --init && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
-    make libcron -j4 && \
+    make libcron -j $THREADS && \
     install -m644 libcron/out/Release/liblibcron.a /usr/lib/ && \
     install -d /usr/include/libcron/ && \
     install -m644 libcron/include/libcron/* /usr/include/libcron/ && \
@@ -29,13 +30,13 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     git clone https://github.com/ToruNiina/toml11 --depth=1 && \
     cd toml11 && \
     cmake . && \
-    make install -j4 && \
+    make install -j $THREADS && \
     cd .. && \
     git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
     cd subconverter && \
     git describe --exact-match HEAD || (sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$sha"'/' src/version.h) ;\
     cmake -DCMAKE_BUILD_TYPE=Release . && \
-    make -j4 && \
+    make -j $THREADS && \
     mv subconverter /usr/bin && \
     mv base ../ && \
     cd .. && \
