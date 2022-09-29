@@ -4,7 +4,7 @@ const api = "https://firefly-sub.up.railway.app";
 const blacklist = {
   url: [
     /(ss|free|proxy)\./,
-    /\.(ml|cf|tk|ga|gq)/,
+    /\.(ml|ga|gq)/,
     /(ssr?|clash|v2ray|proxy)pool/,
   ],
 };
