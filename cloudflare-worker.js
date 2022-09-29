@@ -2,11 +2,7 @@
 const api = "https://firefly-sub.up.railway.app";
 // 设置被屏蔽的订阅链接黑名单
 const blacklist = {
-  url: [
-    /(ss|free|proxy)\./,
-    /\.(ml|ga|gq)/,
-    /(ssr?|clash|v2ray|proxy)pool/,
-  ],
+  url: [/(ss|free|proxy)\./, /\.(ml|ga|gq)/, /(ssr?|clash|v2ray|proxy)pool/],
 };
 // 设置白名单IP
 const whitelist = [".*"];
