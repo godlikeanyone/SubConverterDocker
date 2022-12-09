@@ -35,7 +35,6 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
     cd subconverter && \
     git describe --exact-match HEAD || (sha=$(date -d "8 hour" -u +%y.%m%d%H%M)-$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$sha"'/' src/version.h) ;\
-    sed -i 's/managed_config_prefix=http:\/\/127.0.0.1:25500/managed_config_prefix=https:\/\/firefly-subs.onrender.com/g' pref.ini && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j $THREADS && \
     mv subconverter /usr/bin && \
