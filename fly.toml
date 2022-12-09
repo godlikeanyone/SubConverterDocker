@@ -1,4 +1,4 @@
-# fly.toml file generated for firefly-sub on 2022-12-09T11:58:16+08:00
+# fly.toml file generated for firefly-sub on 2022-12-09T12:47:18+08:00
 
 app = "firefly-sub"
 kill_signal = "SIGINT"
@@ -9,6 +9,7 @@ processes = []
   API_MODE = "true"
   API_TOKEN = "secret"
   MANAGED_PREFIX = "https://firefly-sub.fly.dev"
+
 [experimental]
   allowed_public_ports = []
   auto_rollback = "true"
@@ -19,22 +20,22 @@ processes = []
   processes = ["app"]
   protocol = ["tcp", "udp"]
   script_checks = []
-[services.concurrency]
-  hard_limit = "512"
-  soft_limit = "512"
-  type = "connections"
+  [services.concurrency]
+    hard_limit = "512"
+    soft_limit = "512"
+    type = "connections"
 
-[[services.ports]]
-  force_https = "true"
-  handlers = ["http"]
-  port = "80"
+  [[services.ports]]
+    force_https = "true"
+    handlers = ["http"]
+    port = "80"
 
-[[services.ports]]
-  handlers = ["tls", "http"]
-  port = "443"
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
 
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = "0"
-  timeout = "2s"
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = "0"
+    timeout = "2s"
