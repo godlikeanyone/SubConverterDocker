@@ -1,7 +1,7 @@
 FROM alpine:latest
 ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
 ARG THREADS="4"
-ARG SHA=""
+# ARG SHA=""
 
 # build minimized
 WORKDIR /
@@ -35,8 +35,8 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cd .. && \
     git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
     cd subconverter && \
-    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$SHA"'/' src/version.h;\
-#    git describe --exact-match HEAD || (sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$sha"'/' src/version.h) ;\
+#    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$SHA"'/' src/version.h;\
+    git describe --exact-match HEAD || (sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$sha"'/' src/version.h) ;\
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j $THREADS && \
     mv subconverter /usr/bin && \
