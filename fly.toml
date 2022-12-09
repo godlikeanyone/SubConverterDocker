@@ -11,15 +11,15 @@ processes = []
   MANAGED_PREFIX = "https://firefly-sub.fly.dev"
 
 [experimental]
-  allowed_public_ports = []
+#  allowed_public_ports = []
   auto_rollback = "true"
 
 [[services]]
-  http_checks = []
+#  http_checks = []
   internal_port = "8080"
   processes = ["app"]
   protocol = ["tcp", "udp"]
-  script_checks = []
+#  script_checks = []
   [services.concurrency]
     hard_limit = "512"
     soft_limit = "512"
