@@ -37,7 +37,7 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     git clone https://github.com/LM-Firefly/subconverter.git --depth=1 && \
     cd subconverter && \
 #    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$SHA"'/' src/version.h;\
-    time=$(tz='asia/shanghai' date +%y.%m%d.%H%M-) && sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$time$sha"'/' src/version.h && \
+    time=$(date -d "8 hour" -u +%y.%m%d.%H%M_) && sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$time$sha"'/' src/version.h && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j $THREADS && \
     mv subconverter /usr/bin && \
