@@ -6,8 +6,8 @@ ARG THREADS="4"
 
 # build minimized
 WORKDIR /
-RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
-    apk add --no-cache --virtual .build-tools git g++ build-base linux-headers cmake && \
+RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
+RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers cmake && \
     apk add --no-cache --virtual .build-deps curl-dev rapidjson-dev libevent-dev pcre2-dev yaml-cpp-dev && \
     git clone https://github.com/ftk/quickjspp --depth=1 && \
     cd quickjspp && \
