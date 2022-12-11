@@ -1,10 +1,12 @@
 FROM alpine:latest
-ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
+LABEL maintainer "firefly.lzh@gmail.com"
+# ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
 ARG THREADS="4"
 # ARG SHA=""
 
 # build minimized
 WORKDIR /
+RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && date && apk del tzdata
 RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers cmake && \
     apk add --no-cache --virtual .build-deps curl-dev rapidjson-dev libevent-dev pcre2-dev yaml-cpp-dev && \
     git clone https://github.com/ftk/quickjspp --depth=1 && \
@@ -33,10 +35,10 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cmake -DCMAKE_CXX_STANDARD=17 . && \
     make install -j $THREADS && \
     cd .. && \
-    git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
+    git clone https://github.com/LM-Firefly/subconverter.git --depth=1 && \
     cd subconverter && \
 #    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$SHA"'/' src/version.h;\
-    git describe --exact-match HEAD || (sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$sha"'/' src/version.h) ;\
+    time=$(date +%y.%m%d.%H%M-) && sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$time$sha"'/' src/version.h && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j $THREADS && \
     mv subconverter /usr/bin && \
