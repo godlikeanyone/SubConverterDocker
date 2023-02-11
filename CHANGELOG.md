@@ -1,3 +1,3 @@
-**2023/01/08**
+**2023/01/11**
 
-* Subconverter Dockerfile updated from 0.7.2-buildtime-b8eb846 to 0.7.2-buildtime-7b799a3
+* Subconverter Dockerfile updated from 0.7.2-buildtime-7b799a3 to 0.7.2-buildtime-feb65e9
