@@ -1,3 +1,3 @@
-**2023/01/11**
+**2023/04/29**
 
-* Subconverter Dockerfile updated from 0.7.2-buildtime-7b799a3 to 0.7.2-buildtime-53bb5c8
+* Dockerfile updated from Sub+SimpleWeb v0.7.2-buildtime-25ad1bc to Sub+SimpleWeb v0.7.2-buildtime-a9b6f45

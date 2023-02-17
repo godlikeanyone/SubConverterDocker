@@ -1,8 +1,8 @@
 FROM alpine:latest
+# FROM fireflylzh/subconverter:latest
 LABEL maintainer "firefly.lzh@gmail.com"
 # ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
-ARG THREADS="4"
-# ARG SHA=""
+# ARG THREADS="2"
 
 # build minimized
 WORKDIR /
@@ -32,12 +32,12 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cd .. && \
     git clone https://github.com/ToruNiina/toml11 --depth=1 && \
     cd toml11 && \
-    cmake -DCMAKE_CXX_STANDARD=20 . && \
+    git submodule update --init && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=20 . && \
     make install -j $THREADS && \
     cd .. && \
     git clone https://github.com/LM-Firefly/subconverter.git --depth=1 && \
     cd subconverter && \
-#    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$SHA"'/' src/version.h;\
     time=$(date +%y.%m%d.%H%M-) && sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$time$sha"'/' src/version.h && \
     cmake -DCMAKE_BUILD_TYPE=Release . && \
     make -j $THREADS && \
@@ -48,8 +48,8 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     apk add --no-cache --virtual subconverter-deps pcre2 libcurl yaml-cpp libevent && \
     apk del .build-tools .build-deps
 
+COPY base/ /base/
 # set entry
 WORKDIR /base
 EXPOSE 25500
 CMD subconverter
-COPY base/ /base/
