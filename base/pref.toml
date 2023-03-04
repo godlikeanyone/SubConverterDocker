@@ -2314,7 +2314,7 @@ ruleset = "[]MATCH"
 # import = "snippets/rulesets.toml"
 
 [template]
-template_path = "template"
+template_path = ""
 
 [[template.globals]]
 key = "clash.mixed_port"
