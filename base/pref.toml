@@ -24,21 +24,21 @@ exclude_remarks = [
 ]
 
 # Only include nodes which remarks match the following patterns. Supports regular expression.
-#include_remarks = ["V3.*港"]
+# include_remarks = ["V3.*港"]
 
 # Enable script support for filtering nodes
 enable_filter = false
 # Script used for filtering nodes. Supports inline script and script path. A "filter" function with 1 argument which is a node should be defined in the script.
 # Example: Inline script: Set value to content of script.
 #          Script path: Set value to "path:/path/to/script.js".
-#filter_script = '''
-#function filter(node) {
+# filter_script = '''
+# function filter(node) {
 #    const info = JSON.parse(node.ProxyInfo);
 #    if(info.EncryptMethod.includes('chacha20'))
-#	    return true;
+# 	    return true;
 #    return false;
-#}
-#'''
+# }
+# '''
 
 # Setting an external config file as default when none is specified, supports local files/URL
 # default_external_config = "config/example_external_config.toml"
@@ -80,39 +80,39 @@ proxy_subscription = "SYSTEM"
 # Append a proxy type string ([SS] [SSR] [VMess]) to node remark.
 append_proxy_type = false
 
-# [[userinfo.stream_rule]]
+[[userinfo.stream_rule]]
 # Rules to extract stream data from node
 # Format: full_match_regex|new_format_regex
 # where new_format_regex should be like "total=$1&left=$2&used=$3"
-# match = '^剩余流量：(.*?)\|总流量：(.*)$'
-# replace = 'total=$2&left=$1'
+match = '^剩余流量：(.*?)\|总流量：(.*)$'
+replace = 'total=$2&left=$1'
 
-# [[userinfo.stream_rule]]
-# match = '^剩余流量：(.*?) (.*)$'
-# replace = 'total=$1&left=$2'
+[[userinfo.stream_rule]]
+match = '^剩余流量：(.*?) (.*)$'
+replace = 'total=$1&left=$2'
 
-# [[userinfo.stream_rule]]
-# match = '^Bandwidth: (.*?)/(.*)$'
-# replace = 'used=$1&total=$2'
+[[userinfo.stream_rule]]
+match = '^Bandwidth: (.*?)/(.*)$'
+replace = 'used=$1&total=$2'
 
-# [[userinfo.stream_rule]]
-# match = '^.*剩余(.*?)(?:\s*?)@(?:.*)$'
-# replace = 'total=$1'
+[[userinfo.stream_rule]]
+match = '^.*剩余(.*?)(?:\s*?)@(?:.*)$'
+replace = 'total=$1'
 
-# [[userinfo.time_rule]]
+[[userinfo.time_rule]]
 # Rules to extract expire time data from node
 # Format: full_match_regex|new_format_regex
 # where new_format_regex should follow this example: yyyy:mm:dd:hh:mm:ss
-# match = '^过期时间：(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)$'
-# replace = '$1:$2:$3:$4:$5:$6'
+match = '^过期时间：(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)$'
+replace = '$1:$2:$3:$4:$5:$6'
 
-# [[userinfo.time_rule]]
-# match = '^到期时间:(\d+)-(\d+)-(\d+)$'
-# replace = '$1:$2:$3:0:0:0'
+[[userinfo.time_rule]]
+match = '^到期时间:(\d+)-(\d+)-(\d+)$'
+replace = '$1:$2:$3:0:0:0'
 
-# [[userinfo.time_rule]]
-# match = '^Smart Access expire: (\d+)/(\d+)/(\d+)$'
-# replace = '$1:$2:$3:0:0:0'
+[[userinfo.time_rule]]
+match = '^Smart Access expire: (\d+)/(\d+)/(\d+)$'
+replace = '$1:$2:$3:0:0:0'
 
 [node_pref]
 # udp_flag = true
@@ -123,11 +123,11 @@ append_proxy_type = false
 # sort_flag = false
 # Script used for sorting nodes. A "compare" function with 2 arguments which are the 2 nodes to be compared should be defined in the script. Supports inline script and script path.
 # Examples can be seen at the filter_script option in [common] section.
-#sort_script = '''
-#function compare(node_a, node_b) {
+# sort_script = '''
+# function compare(node_a, node_b) {
 #   return info_a.Remark > info_b.Remark;
-#}
-#'''
+# }
+# '''
 
 filter_deprecated_nodes = true
 append_sub_userinfo = true
@@ -393,6 +393,8 @@ replace = ""
 match = "\\(?((x|X)?(\\d+)(\\.?\\d+)?)((\\s?倍率?)|(x|X))\\)?"
 replace = "[x$1]"
 
+# import = "snippets/rename_node.toml"
+
 [managed_config]
 # Append a '#!MANAGED-CONFIG' info to Surge configurations
 write_managed_config = true
@@ -410,7 +412,7 @@ config_update_strict = true
 quanx_device_id = ""
 
 [surge_external_proxy]
-#surge_ssr_path = "/usr/bin/ssr-local"
+# surge_ssr_path = "/usr/bin/ssr-local"
 resolve_hostname = true
 
 [emojis]
@@ -2104,7 +2106,7 @@ rule = ["[]🎯 直连服务"]
 enabled = true
 
 # Overwrite the existing rules in rule_base
-overwrite_original_rules = false
+overwrite_original_rules = true
 
 # Perform a ruleset update on request
 update_ruleset_on_request = true
@@ -2312,7 +2314,7 @@ ruleset = "[]MATCH"
 # import = "snippets/rulesets.toml"
 
 [template]
-template_path = ""
+template_path = "template"
 
 [[template.globals]]
 key = "clash.mixed_port"
@@ -2390,10 +2392,6 @@ target = "/sub?target=v2ray"
 uri = "/trojan"
 target = "/sub?target=trojan"
 
-[[aliases]]
-uri = "/test"
-target = "/render?path=templates/test.tpl"
-
 # [[tasks]]
 # name = "tick"
 # cronexp = "0/10 * * * * ?"
@@ -2422,4 +2420,4 @@ cache_config = 0
 cache_ruleset = 0
 script_clean_context = true
 async_fetch_ruleset = true
-skip_failed_links = false
+skip_failed_links = true
