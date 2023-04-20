@@ -20,7 +20,7 @@ prepend_insert_url = true
 
 # Exclude nodes which remarks match the following patterns. Supports regular expression.
 exclude_remarks = [
-    "(到期|剩余流量|时间|官网|产品|先购买套餐|流量消耗|更新订阅|套餐到期|(.*流量.*剩.*天)|(■等级警报■)|(\\(限速\\))|(\\[限速\\])|(\\[游戏\\])|(\\[游戏专用\\])|(\\[将下线\\])|(.*耗尽.*)|(近期下线)|(游戏专线)|(维护)|(测试节点)|(防失联地址)|(官方地址))",
+    "((到期)|(剩余流量)|(时间)|(官网)|(产品)|(先购买套餐)|(流量消耗)|(更新订阅)|(套餐到期)|(.*流量.*剩.*天)|(■等级警报■)|(\\(限速\\))|(\\[限速\\])|(\\[游戏\\])|(\\[游戏专用\\])|(\\[将下线\\])|(.*耗尽.*)|(近期下线)|(游戏专线)|(维护)|(测试节点)|(防失联地址)|(官方地址)|(官方网站))",
 ]
 
 # Only include nodes which remarks match the following patterns. Supports regular expression.
@@ -400,7 +400,7 @@ replace = "[x$1]"
 write_managed_config = true
 
 # Address prefix for MANAGED-CONFIG info, without the trailing "/".
-managed_config_prefix = "https://firefly-sub.up.railway.app"
+managed_config_prefix = "https://firefly-subs.onrender.com"
 
 # Managed config update interval in seconds, determine how long the config will be updated.
 config_update_interval = 3600
