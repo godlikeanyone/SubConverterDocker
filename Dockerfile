@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:latest
 # FROM fireflylzh/subconverter:latest
 LABEL maintainer "firefly.lzh@gmail.com"
 # ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
