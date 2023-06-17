@@ -400,7 +400,7 @@ replace = "[x$1]"
 write_managed_config = true
 
 # Address prefix for MANAGED-CONFIG info, without the trailing "/".
-managed_config_prefix = "https://sub.firefly-lm.workers.dev"
+managed_config_prefix = "https://railway-sub.firefly-lm.workers.dev"
 
 # Managed config update interval in seconds, determine how long the config will be updated.
 config_update_interval = 3600
@@ -2455,8 +2455,8 @@ serve_file_root = "./sub-web"
 [advanced]
 log_level = "debug"
 print_debug_info = false
-max_pending_connections = 10240
-max_concurrent_threads = 64
+max_pending_connections = 65535
+max_concurrent_threads = 65535
 max_allowed_rulesets = 0
 max_allowed_rules = 0
 max_allowed_download_size = 0
