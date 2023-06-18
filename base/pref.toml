@@ -2455,8 +2455,8 @@ serve_file_root = "./sub-web"
 [advanced]
 log_level = "debug"
 print_debug_info = false
-max_pending_connections = 0
-max_concurrent_threads = 0
+max_pending_connections = 65535
+max_concurrent_threads = 65535
 max_allowed_rulesets = 0
 max_allowed_rules = 0
 max_allowed_download_size = 0
