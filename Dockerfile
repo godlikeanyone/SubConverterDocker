@@ -3,6 +3,8 @@ FROM alpine:latest
 LABEL maintainer "firefly.lzh@gmail.com"
 # ADD https://github.com/LM-Firefly/subconverter/commits/master.atom cache_bust
 # ARG THREADS="2"
+ARG BACKEND_URL
+ENV BACKEND_URL=$BACKEND_URL
 
 # build minimized
 WORKDIR /
@@ -49,6 +51,8 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     apk del .build-tools .build-deps
 
 COPY base/ /base/
+# set managed_config_prefix
+sed -i 's/https:\/\/railway-sub.firefly-lm.workers.dev/$BACKEND_URL/g' base/pref.toml
 # set entry
 WORKDIR /base
 EXPOSE 25500
