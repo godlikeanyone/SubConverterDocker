@@ -400,7 +400,7 @@ replace = "[x$1]"
 write_managed_config = true
 
 # Address prefix for MANAGED-CONFIG info, without the trailing "/".
-managed_config_prefix = "https://railway-sub.firefly-lm.workers.dev"
+managed_config_prefix = "https://firefly-sub.up.railway.app"
 
 # Managed config update interval in seconds, determine how long the config will be updated.
 config_update_interval = 3600
