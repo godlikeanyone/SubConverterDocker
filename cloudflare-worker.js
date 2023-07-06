@@ -1,5 +1,5 @@
 // 编辑为你的后端地址
-const api = "https://firefly-subs.onrender.com";
+const api = "https://firefly-sub.railway.app";
 // 设置被屏蔽的订阅链接黑名单
 const blacklist = {
   url: [
