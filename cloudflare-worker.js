@@ -1,5 +1,5 @@
 // 编辑为你的后端地址
-const api = "https://fireflysub-fireflylzh.b4a.run";
+const api = "https://sub-fireflylzh.b4a.run";
 // 设置被屏蔽的订阅链接黑名单
 const blacklist = {
   url: [
