@@ -2,30 +2,33 @@
 const api = "https://fireflysub-fireflylzh.b4a.run";
 // 设置被屏蔽的订阅链接黑名单
 const blacklist = {
-  //  url: [/(ss|free|proxy)\./, /\.(ml|ga|gq)/, /(ssr?|clash|v2ray|proxy)pool/],
+  url: [
+    /(ss|free|proxy)\./,
+    /\.(ml|ga|gq)/,
+    /(ssr?|clash|v2ray|proxy)pool/,
+    "stgod",
+    "lonxin",
+    "linbaoz",
+    "luoml",
+  ],
 };
 // 设置白名单IP
-const whitelist = [ ".*" ];
-addEventListener( "fetch", ( event ) =>
-{
+const whitelist = [".*"];
+addEventListener("fetch", (event) => {
   event.respondWith(
-    handleRequest( event.request ).catch(
-      ( err ) => new Response( err.stack, { status: 500 } )
+    handleRequest(event.request).catch(
+      (err) => new Response(err.stack, { status: 500 })
     )
   );
-} );
+});
 
-function isListed ( uri, listing )
-{
+function isListed(uri, listing) {
   var ret = false;
-  if ( typeof uri == "string" )
-  {
-    listing.forEach( ( m ) =>
-    {
-      if ( uri.match( m ) != null ) ret = true;
-    } );
-  } else
-  {
+  if (typeof uri == "string") {
+    listing.forEach((m) => {
+      if (uri.match(m) != null) ret = true;
+    });
+  } else {
     //   decide what to do when Origin is null
     ret = true; // true accepts null origins false rejects them.
   }
@@ -37,44 +40,40 @@ function isListed ( uri, listing )
  * @param {Request} request
  * @returns {Promise<Response>}
  */
-async function handleRequest ( request )
-{
-  var origin_url = new URL( request.url );
-  var orig = request.headers.get( "Origin" );
-  var sub_url = decodeURI( origin_url.searchParams.get( "url" ) || "" );
-  console.log( sub_url );
-  if ( !isListed( sub_url, blacklist.url ) && isListed( orig, whitelist ) )
-  {
-    let newreq = new Request( request, {
+async function handleRequest(request) {
+  var origin_url = new URL(request.url);
+  var orig = request.headers.get("Origin");
+  var sub_url = decodeURI(origin_url.searchParams.get("url") || "");
+  console.log(sub_url);
+  if (!isListed(sub_url, blacklist.url) && isListed(orig, whitelist)) {
+    let newreq = new Request(request, {
       headers: request.headers,
-    } );
+    });
     const { pathname, search } = origin_url;
     let fetch_url = api + pathname + search;
     //console.log(fetch_url);
-    let response = await fetch( fetch_url, newreq );
-    let myHeaders = new Headers( response.headers );
+    let response = await fetch(fetch_url, newreq);
+    let myHeaders = new Headers(response.headers);
     cors_headers = [];
     allh = {};
-    for ( var pair of response.headers.entries() )
-    {
-      cors_headers.push( pair[ 0 ] );
-      allh[ pair[ 0 ] ] = pair[ 1 ];
+    for (var pair of response.headers.entries()) {
+      cors_headers.push(pair[0]);
+      allh[pair[0]] = pair[1];
     }
-    cors_headers.push( "cors-received-headers" );
-    myHeaders.set( "Access-Control-Allow-Origin", request.headers.get( "Origin" ) );
+    cors_headers.push("cors-received-headers");
+    myHeaders.set("Access-Control-Allow-Origin", request.headers.get("Origin"));
 
-    myHeaders.set( "Access-Control-Expose-Headers", cors_headers.join( "," ) );
+    myHeaders.set("Access-Control-Expose-Headers", cors_headers.join(","));
 
-    myHeaders.set( "cors-received-headers", JSON.stringify( allh ) );
+    myHeaders.set("cors-received-headers", JSON.stringify(allh));
     let body = await response.arrayBuffer();
     var init = {
       headers: myHeaders,
       status: response.status,
       statusText: response.statusText,
     };
-    return new Response( body, init );
-  } else
-  {
+    return new Response(body, init);
+  } else {
     return new Response(
       `
     <!doctype html><html lang="zh-cn"><head><meta charset="utf-8"></head>
