@@ -37,7 +37,7 @@ RUN apk add --no-cache --virtual .build-tools git g++ build-base linux-headers c
     cmake -DCMAKE_CXX_STANDARD=11 . && \
     make install -j $THREADS && \
     cd .. && \
-    git clone https://github.com/LM-Firefly/subconverter --depth=1 && \
+    git clone https://github.com/godlikeanyone/subconverter --depth=1 && \
     cd subconverter && \
 #    [ -n "$SHA" ] && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1 '"$SHA"'/' src/version.h;\
     time=$(date +%y.%m%d.%H%M-) && sha=$(git rev-parse --short HEAD) && sed -i 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$time$sha"'/' src/version.h && \
